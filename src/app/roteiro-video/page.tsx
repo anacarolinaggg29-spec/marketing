@@ -4,9 +4,12 @@ export default function RoteiroVideoPage() {
   return (
     <ChatInterface 
       functionType="roteiro_video"
-      title="Roteiro de Vídeo com Claude"
-      welcomeMessage="Bem-vindo ao criador de roteiros para Instagram. Os roteiros dos vídeos serão criados respeitando as restrições da OAB. Por favor, informe sua área de atuação para começarmos."
-      promptGuidance="Utilize Claude 3.5 para gerar scripts persuasivos e éticos."
+      title="Roteiro de Vídeos"
+      welcomeMessage="Bem-vindo ao criador de roteiros para Instagram. Os roteiros serão criados respeitando as restrições da OAB. Para começarmos, por favor informe: 
+      1 - Sua área de atuação 
+      2 - Tipo de vídeo (Reels, Feed, Story ou outro)
+      3 - Objetivo do Vídeo"
+      promptGuidance="Geração de roteiros persuasivos e éticos."
     />
   );
 }

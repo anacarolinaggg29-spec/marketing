@@ -24,7 +24,7 @@ export default function Home() {
         <div className="p-4 bg-[rgba(178,204,255,0.1)] rounded-xl mb-6 text-[var(--accent-blue)]">
           <Video size={48} strokeWidth={1.5} />
         </div>
-        <h3 className="font-serif text-3xl font-light mb-2">Roteiro pra Vídeo</h3>
+        <h3 className="font-serif text-3xl font-light mb-2">Roteiro de Vídeos</h3>
         <p className="text-gray-400 text-sm max-w-md">
           Generate viral scripts for Reels, YouTube or TikTok.
         </p>

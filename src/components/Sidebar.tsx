@@ -5,8 +5,8 @@ import { Video, Type, Image as LucideImage, Film, User } from 'lucide-react';
 
 export default function Sidebar() {
   const menuItems = [
-    { name: 'Roteiro pra Vídeo', icon: <Video size={20} />, href: '/roteiro-video' },
-    { name: 'Roteiro pra Legendas', icon: <Type size={20} />, href: '/roteiro-legenda' },
+    { name: 'Roteiro de Vídeos', icon: <Video size={20} />, href: '/roteiro-video' },
+    { name: 'Roteiro de Legendas', icon: <Type size={20} />, href: '/roteiro-legenda' },
     { name: 'Criação de Imagens', icon: <LucideImage size={20} />, href: '/criacao-imagem' },
     { name: 'Criação de Vídeos', icon: <Film size={20} />, href: '/instrucoes-kling' },
   ];

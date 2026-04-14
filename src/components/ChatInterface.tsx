@@ -32,7 +32,6 @@ export default function ChatInterface({
   const [isRecording, setIsRecording] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isWaitingForArea, setIsWaitingForArea] = useState(true);
   
   const scrollRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -47,18 +46,6 @@ export default function ChatInterface({
 
   const handleSend = async () => {
     if (!input.trim() && files.length === 0) return;
-
-    // Se estivermos esperando a área de atuação (Regra OAB)
-    if (isWaitingForArea && functionType !== 'criacao_imagem') {
-      setAreaAtuacao(input);
-      setIsWaitingForArea(false);
-      setMessages(prev => [...prev, 
-        { id: Date.now().toString(), role: 'user' as const, content: input },
-        { id: (Date.now()+1).toString(), role: 'assistant' as const, content: `Entendido. Área de atuação definida como: ${input}. Como posso ajudar com seu marketing hoje?` }
-      ]);
-      setInput('');
-      return;
-    }
 
     const userMessage: Message = {
       id: Date.now().toString(),
