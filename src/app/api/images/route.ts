@@ -53,8 +53,8 @@ export async function POST(req: Request) {
     
     return NextResponse.json({ 
       originalAnalysis: description,
-      dalleImageUrl: dalleResponse.data[0].url,
-      geminiImageUrl: dalleResponse.data[0].url, // Mocking gemini output or using a placeholder
+      dalleImageUrl: dalleResponse.data?.[0]?.url || '',
+      geminiImageUrl: dalleResponse.data?.[0]?.url || '', // Mocking gemini output or using a placeholder
       format: "1:1"
     });
 

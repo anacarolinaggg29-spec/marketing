@@ -53,8 +53,8 @@ export default function ChatInterface({
       setAreaAtuacao(input);
       setIsWaitingForArea(false);
       setMessages(prev => [...prev, 
-        { id: Date.now().toString(), role: 'user', content: input },
-        { id: (Date.now()+1).toString(), role: 'assistant', content: `Entendido. Área de atuação definida como: ${input}. Como posso ajudar com seu marketing hoje?` }
+        { id: Date.now().toString(), role: 'user' as const, content: input },
+        { id: (Date.now()+1).toString(), role: 'assistant' as const, content: `Entendido. Área de atuação definida como: ${input}. Como posso ajudar com seu marketing hoje?` }
       ]);
       setInput('');
       return;
@@ -84,7 +84,7 @@ export default function ChatInterface({
         
         setMessages(prev => [...prev, {
           id: Date.now().toString(),
-          role: 'assistant',
+          role: 'assistant' as const,
           content: `Aqui estão suas fotos profissionais (1:1):\n\n[Gemini Version](${imgData.geminiImageUrl})\n[ChatGPT Version](${imgData.dalleImageUrl})\n\nAnálise: ${imgData.originalAnalysis}`
         }]);
         setFiles([]);
@@ -101,7 +101,7 @@ export default function ChatInterface({
 
       setMessages(prev => [...prev, {
         id: Date.now().toString(),
-        role: 'assistant',
+        role: 'assistant' as const,
         content: data.content
       }].slice(-11));
     } catch (err) {
