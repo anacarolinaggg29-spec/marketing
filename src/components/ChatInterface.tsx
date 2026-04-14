@@ -169,17 +169,17 @@ export default function ChatInterface({
   return (
     <div className="flex flex-col h-full relative overflow-hidden">
       {/* Header */}
-      <div className="p-6 border-b border-[rgba(255,255,255,0.08)] bg-[rgba(0,0,0,0.2)]">
-        <h2 className="text-xl font-semibold text-[var(--accent-gold)]">{title}</h2>
+      <div className="p-10 border-b border-[rgba(255,255,255,0.08)] bg-[rgba(0,0,0,0.2)]">
+        <h2 className="font-serif text-4xl font-light text-white mb-2 italic">{title}</h2>
         {promptGuidance && (
-          <p className="text-xs text-gray-400 mt-1">{promptGuidance}</p>
+          <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-bold">{promptGuidance}</p>
         )}
       </div>
 
       {/* Messages area */}
       <div 
         ref={scrollRef}
-        className="flex-1 overflow-y-auto p-6 space-y-6 scroll-smooth"
+        className="flex-1 overflow-y-auto p-10 space-y-8 scroll-smooth"
       >
         {messages.map((m) => (
           <div 
@@ -187,10 +187,10 @@ export default function ChatInterface({
             className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}
           >
             <div 
-              className={`max-w-[80%] p-4 rounded-2xl ${
+              className={`max-w-[75%] p-6 rounded-2xl ${
                 m.role === 'user' 
-                  ? 'bg-[var(--chat-user-bg)] border border-[rgba(207,170,107,0.2)]' 
-                  : 'bg-[var(--chat-assistant-bg)] border border-[rgba(255,255,255,0.05)]'
+                  ? 'bg-[rgba(178,204,255,0.08)] border border-[rgba(178,204,255,0.15)]' 
+                  : 'bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.05)]'
               } glass-panel`}
             >
               <div className="text-sm leading-relaxed whitespace-pre-wrap">
@@ -294,7 +294,7 @@ export default function ChatInterface({
             <button 
               onClick={handleSend}
               disabled={isLoading || (!input.trim() && files.length === 0)}
-              className="p-3 bg-[var(--accent-gold)] hover:bg-[var(--accent-gold-hover)] text-black rounded-xl transition-all shadow-[0_0_15px_rgba(207,170,107,0.3)] disabled:opacity-50 disabled:shadow-none"
+              className="p-3 bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] text-black rounded-xl transition-all shadow-[0_0_15px_rgba(178,204,255,0.2)] disabled:opacity-50 disabled:shadow-none"
             >
               <Send size={20} />
             </button>

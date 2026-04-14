@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 import MobileNav from "@/components/MobileNav";
 import Sidebar from "@/components/Sidebar";
 
@@ -16,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className="dark">
-      <body className="h-screen overflow-hidden bg-[var(--background)]">
+      <body className={`${inter.variable} ${playfair.variable} font-sans h-screen overflow-hidden bg-[var(--background)]`}>
         <div className="flex h-screen overflow-hidden">
           <Sidebar />
           <div className="flex min-h-0 flex-1 flex-col">

@@ -1,193 +1,76 @@
-import Link from "next/link";
-import AppShell from "@/components/AppShell";
-import {
-  compliancePillars,
-  dashboardMetrics,
-  workflows,
-} from "@/lib/studio-data";
+import { Video, Play, Image as LucideImage, Sparkles, Wand2 } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <AppShell
-      badge="Painel operacional"
-      category="Studio overview"
-      title="Centro de comando do SUPER MKT"
-      description="A base visual ja existia. Agora o produto passa a ter rotas reais, modulos acionaveis e uma leitura mais clara do que deve ser produzido em cada fluxo."
-      actions={[
-        { label: "Abrir roteiro de video", href: "/roteiro-video" },
-        {
-          label: "Ver criacao 1:1",
-          href: "/criacao-imagem",
-          variant: "secondary",
-        },
-      ]}
-    >
-      <div className="grid gap-6 xl:grid-cols-[1.4fr_0.9fr]">
-        <div className="space-y-6">
-          <section className="glass-panel overflow-hidden px-6 py-6">
-            <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-              <div className="space-y-4">
-                <p className="text-xs uppercase tracking-[0.28em] text-gray-500">
-                  Proxima etapa recomendada
-                </p>
-                <h2 className="max-w-xl font-serif text-3xl text-white">
-                  Consolidar os briefings operacionais antes de conectar IA,
-                  historico e persistencia.
-                </h2>
-                <p className="max-w-2xl text-sm leading-7 text-gray-300">
-                  O schema Prisma ja sugere usuarios, chats, mensagens e
-                  imagens geradas. Nesta etapa, a interface foi evoluida para
-                  refletir esses fluxos de forma navegavel e pronta para a
-                  proxima integracao.
-                </p>
-              </div>
-              <div className="rounded-[28px] border border-[rgba(255,255,255,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-5">
-                <p className="text-xs uppercase tracking-[0.24em] text-gray-500">
-                  Estado do produto
-                </p>
-                <div className="mt-5 space-y-4">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <span className="text-sm text-gray-400">Interface base</span>
-                    <span className="text-sm font-semibold text-[#8fd3a9]">
-                      Estruturada
-                    </span>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-4">
-                    <span className="text-sm text-gray-400">Rotas principais</span>
-                    <span className="text-sm font-semibold text-[#8fd3a9]">
-                      Criadas
-                    </span>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-4">
-                    <span className="text-sm text-gray-400">Persistencia real</span>
-                    <span className="text-sm font-semibold text-[#f0c77b]">
-                      Proxima iteracao
-                    </span>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-4">
-                    <span className="text-sm text-gray-400">IA generativa</span>
-                    <span className="text-sm font-semibold text-[#f0c77b]">
-                      A conectar
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+    <div className="min-h-full flex flex-col p-16 animate-fade-in">
+      {/* Hero Section */}
+      <h1 className="font-serif text-6xl italic font-light mb-6 tracking-tight">
+        Olá, Doutor.
+      </h1>
+      <div className="w-16 h-[2px] bg-[var(--accent-blue)] mb-8" />
+      
+      <p className="max-w-xl text-gray-400 text-lg leading-relaxed font-light mb-16">
+        How can I assist your market positioning today? From content analysis to global campaign architectures, I am your dedicated digital jurist of marketing strategy.
+      </p>
 
-          <section className="grid gap-4 md:grid-cols-3">
-            {dashboardMetrics.map((metric) => (
-              <article key={metric.label} className="glass-panel px-5 py-5">
-                <p className="text-xs uppercase tracking-[0.24em] text-gray-500">
-                  {metric.label}
-                </p>
-                <p className="mt-3 text-4xl font-semibold text-[var(--accent-gold)]">
-                  {metric.value}
-                </p>
-                <p className="mt-3 text-sm leading-6 text-gray-300">
-                  {metric.detail}
-                </p>
-              </article>
-            ))}
-          </section>
-
-          <section className="glass-panel px-6 py-6">
-            <div className="flex items-end justify-between gap-4 border-b border-[rgba(255,255,255,0.08)] pb-4">
-              <div>
-                <p className="text-xs uppercase tracking-[0.28em] text-gray-500">
-                  Modulos principais
-                </p>
-                <h2 className="mt-2 text-2xl font-semibold text-white">
-                  Fluxos ativos no estagio atual
-                </h2>
-              </div>
-            </div>
-            <div className="mt-5 grid gap-4 md:grid-cols-2">
-              {workflows.map((workflow) => (
-                <Link
-                  key={workflow.slug}
-                  href={workflow.href}
-                  className="group rounded-[28px] border border-[rgba(255,255,255,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-5 transition hover:border-[rgba(207,170,107,0.22)] hover:bg-[rgba(255,255,255,0.05)]"
-                >
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="rounded-full border border-[rgba(255,255,255,0.08)] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-gray-400">
-                      {workflow.category}
-                    </span>
-                    <span className="text-[11px] uppercase tracking-[0.2em] text-[var(--accent-gold)]">
-                      {workflow.badge}
-                    </span>
-                  </div>
-                  <h3 className="mt-4 text-xl font-semibold text-white transition group-hover:text-[var(--accent-gold)]">
-                    {workflow.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-6 text-gray-300">
-                    {workflow.description}
-                  </p>
-                  <div className="mt-5 flex items-center justify-between gap-4 text-sm">
-                    <span className="text-gray-400">{workflow.estimatedTime}</span>
-                    <span className="font-medium text-white">
-                      Abrir modulo
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-        </div>
-
-        <div className="space-y-6">
-          <section className="glass-panel px-6 py-6">
-            <p className="text-xs uppercase tracking-[0.28em] text-gray-500">
-              Pilares de compliance
-            </p>
-            <div className="mt-5 space-y-3">
-              {compliancePillars.map((pillar) => (
-                <div
-                  key={pillar}
-                  className="rounded-3xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-4 py-4 text-sm leading-6 text-gray-200"
-                >
-                  {pillar}
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="glass-panel px-6 py-6">
-            <p className="text-xs uppercase tracking-[0.28em] text-gray-500">
-              Mapa tecnico
-            </p>
-            <div className="mt-5 space-y-4">
-              <div className="rounded-3xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-4 py-4">
-                <p className="text-sm font-semibold text-white">
-                  `User`, `Chat` e `Message`
-                </p>
-                <p className="mt-2 text-sm leading-6 text-gray-300">
-                  O schema ja define a espinha dorsal para historico de
-                  conversas e rastreio por funcao.
-                </p>
-              </div>
-              <div className="rounded-3xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-4 py-4">
-                <p className="text-sm font-semibold text-white">
-                  `GeneratedImage`
-                </p>
-                <p className="mt-2 text-sm leading-6 text-gray-300">
-                  Ha espaco claro para conectar motores diferentes e comparar
-                  saidas 1:1 na mesma sessao.
-                </p>
-              </div>
-              <div className="rounded-3xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-4 py-4">
-                <p className="text-sm font-semibold text-white">
-                  Proximo encaixe natural
-                </p>
-                <p className="mt-2 text-sm leading-6 text-gray-300">
-                  Criar `lib/prisma`, seed inicial e actions para gravar
-                  briefings, mensagens e resultados por modulo.
-                </p>
-              </div>
-            </div>
-          </section>
-        </div>
+      {/* Quick Start Label */}
+      <div className="flex items-center space-x-2 mb-8">
+        <span className="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-bold">Quick Start</span>
       </div>
-    </AppShell>
+
+      {/* Main Feature Card */}
+      <div className="w-full max-w-4xl glass-panel p-12 flex flex-col items-center justify-center text-center border-none mb-8 bg-[rgba(30,32,38,0.6)]">
+        <div className="p-4 bg-[rgba(178,204,255,0.1)] rounded-xl mb-6 text-[var(--accent-blue)]">
+          <Video size={48} strokeWidth={1.5} />
+        </div>
+        <h3 className="font-serif text-3xl font-light mb-2">Roteiro pra Vídeo</h3>
+        <p className="text-gray-400 text-sm max-w-md">
+          Generate viral scripts for Reels, YouTube or TikTok.
+        </p>
+      </div>
+
+      {/* Steps Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full max-w-4xl">
+        <div className="glass-panel p-6 flex flex-col items-center text-center space-y-4">
+          <div className="w-10 h-10 rounded-lg bg-[rgba(255,255,255,0.03)] flex items-center justify-center text-gray-400">
+            <Video size={20} />
+          </div>
+          <p className="text-[10px] text-gray-500 font-medium leading-relaxed">
+            1 - Grave um video falando o roteiro, mesmo desarrumado
+          </p>
+        </div>
+
+        <div className="glass-panel p-6 flex flex-col items-center text-center space-y-4">
+          <div className="w-10 h-10 rounded-lg bg-[rgba(255,255,255,0.03)] flex items-center justify-center text-gray-400">
+            <LucideImage size={20} />
+          </div>
+          <p className="text-[10px] text-gray-500 font-medium leading-relaxed">
+            2 - Selecione uma foto pra ser animada como video
+          </p>
+        </div>
+
+        <div className="glass-panel p-6 flex flex-col items-center text-center space-y-4">
+          <div className="w-10 h-10 rounded-lg bg-[rgba(255,255,255,0.03)] flex items-center justify-center text-gray-400">
+            <Sparkles size={20} />
+          </div>
+          <p className="text-[10px] text-gray-500 font-medium leading-relaxed">
+            3 - Acesse o Kling e siga as instruções do tutorial
+          </p>
+        </div>
+
+        <Link href="/instrucoes-kling" className="bg-[var(--accent-blue)] hover:bg-[var(--accent-blue-hover)] rounded-xl p-6 flex flex-col items-center justify-center text-black transition-all">
+          <div className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center mb-4">
+            <Play size={20} fill="currentColor" />
+          </div>
+          <p className="text-[10px] uppercase font-bold tracking-widest">Acessar Tutorial</p>
+        </Link>
+      </div>
+
+      {/* Footer Quote */}
+      <div className="mt-12 text-[9px] uppercase tracking-[0.2em] text-gray-600 font-semibold">
+        MARKET INSIGHTS GENERATED BY DIGITAL JURIST AI ARE SUBJECT TO STRATEGIC REVIEW.
+      </div>
+    </div>
   );
 }
