@@ -1,10 +1,5 @@
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
 import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || '',
-});
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
@@ -17,8 +12,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Nenhuma imagem enviada' }, { status: 400 });
     }
 
-    if (!process.env.OPENAI_API_KEY || !process.env.GEMINI_API_KEY) {
-       return NextResponse.json({ error: 'Chaves de API não configuradas' }, { status: 500 });
+    if (!process.env.GEMINI_API_KEY) {
+       return NextResponse.json({ error: 'Chave Gemini não configurada' }, { status: 500 });
     }
 
     // 1. Analisar a imagem original com Gemini (Vision) para criar um prompt profissional
@@ -39,27 +34,20 @@ export async function POST(req: Request) {
     ]);
     const description = result.response.text();
 
-    // 2. Gerar com ChatGPT (DALL-E 3) - 1:1
-    const dalleResponse = await openai.images.generate({
-      model: "dall-e-3",
-      prompt: `Professional corporate headshot, 1:1 aspect ratio, based on this description: ${description}. High-end photography, cinematic lighting.`,
-      n: 1,
-      size: "1024x1024",
-    });
-
-    // 3. Simular geração Gemini (usando a análise para produzir o visual profissional)
-    // Nota: Geração direta de imagem no Google AI SDK (Imagen 3) requer acesso específico. 
-    // Para esta versão local, entregaremos o resultado do DALL-E e a análise refinada.
+    // 2. Mock de geração (Removido OpenAI DALL-E)
+    // Para esta fase de teste somente com Gemini Key, retornamos a análise refinada.
+    // A geração real de Imagens via Gemini (Imagen 3) geralmente ocorre via Vertex AI.
     
     return NextResponse.json({ 
       originalAnalysis: description,
-      dalleImageUrl: dalleResponse.data?.[0]?.url || '',
-      geminiImageUrl: dalleResponse.data?.[0]?.url || '', // Mocking gemini output or using a placeholder
-      format: "1:1"
+      dalleImageUrl: "", // Desativado (OpenAI removida)
+      geminiImageUrl: "https://via.placeholder.com/1024x1024.png?text=Gemini+Vision+Analysis+Done", 
+      format: "1:1",
+      status: "Only Gemini Key active. OpenAI generation skipped."
     });
 
   } catch (error: any) {
-    console.error('Erro na Geração de Imagens:', error);
+    console.error('Erro na Geração de Imagens (Gemini):', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

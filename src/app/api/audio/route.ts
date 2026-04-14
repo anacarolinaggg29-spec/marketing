@@ -1,9 +1,7 @@
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || '',
-});
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
 export async function POST(req: Request) {
   try {
@@ -14,20 +12,32 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Nenhum arquivo de áudio enviado' }, { status: 400 });
     }
 
-    if (!process.env.OPENAI_API_KEY) {
-      return NextResponse.json({ error: 'Chave OpenAI não configurada' }, { status: 500 });
+    if (!process.env.GEMINI_API_KEY) {
+      return NextResponse.json({ error: 'Chave Gemini não configurada' }, { status: 500 });
     }
 
-    // OpenAI Whisper requer um arquivo real ou buffer com metadados
-    const transcription = await openai.audio.transcriptions.create({
-      file: file,
-      model: "whisper-1",
-    });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    
+    const fileBuffer = await file.arrayBuffer();
+    const base64Audio = Buffer.from(fileBuffer).toString('base64');
 
-    return NextResponse.json({ text: transcription.text });
+    // Gemini consegue ouvir o áudio e transcrever
+    const result = await model.generateContent([
+      {
+        inlineData: {
+          data: base64Audio,
+          mimeType: file.type
+        }
+      },
+      "Transcreva este áudio exatamente como dito, sem adicionar comentários."
+    ]);
+
+    const transcription = result.response.text();
+
+    return NextResponse.json({ text: transcription });
 
   } catch (error: any) {
-    console.error('Erro na Transcrição:', error);
+    console.error('Erro na Transcrição (Gemini):', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
