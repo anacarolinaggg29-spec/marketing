@@ -1,65 +1,193 @@
-import Image from "next/image";
+import Link from "next/link";
+import AppShell from "@/components/AppShell";
+import {
+  compliancePillars,
+  dashboardMetrics,
+  workflows,
+} from "@/lib/studio-data";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <AppShell
+      badge="Painel operacional"
+      category="Studio overview"
+      title="Centro de comando do SUPER MKT"
+      description="A base visual ja existia. Agora o produto passa a ter rotas reais, modulos acionaveis e uma leitura mais clara do que deve ser produzido em cada fluxo."
+      actions={[
+        { label: "Abrir roteiro de video", href: "/roteiro-video" },
+        {
+          label: "Ver criacao 1:1",
+          href: "/criacao-imagem",
+          variant: "secondary",
+        },
+      ]}
+    >
+      <div className="grid gap-6 xl:grid-cols-[1.4fr_0.9fr]">
+        <div className="space-y-6">
+          <section className="glass-panel overflow-hidden px-6 py-6">
+            <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="space-y-4">
+                <p className="text-xs uppercase tracking-[0.28em] text-gray-500">
+                  Proxima etapa recomendada
+                </p>
+                <h2 className="max-w-xl font-serif text-3xl text-white">
+                  Consolidar os briefings operacionais antes de conectar IA,
+                  historico e persistencia.
+                </h2>
+                <p className="max-w-2xl text-sm leading-7 text-gray-300">
+                  O schema Prisma ja sugere usuarios, chats, mensagens e
+                  imagens geradas. Nesta etapa, a interface foi evoluida para
+                  refletir esses fluxos de forma navegavel e pronta para a
+                  proxima integracao.
+                </p>
+              </div>
+              <div className="rounded-[28px] border border-[rgba(255,255,255,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-5">
+                <p className="text-xs uppercase tracking-[0.24em] text-gray-500">
+                  Estado do produto
+                </p>
+                <div className="mt-5 space-y-4">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span className="text-sm text-gray-400">Interface base</span>
+                    <span className="text-sm font-semibold text-[#8fd3a9]">
+                      Estruturada
+                    </span>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span className="text-sm text-gray-400">Rotas principais</span>
+                    <span className="text-sm font-semibold text-[#8fd3a9]">
+                      Criadas
+                    </span>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span className="text-sm text-gray-400">Persistencia real</span>
+                    <span className="text-sm font-semibold text-[#f0c77b]">
+                      Proxima iteracao
+                    </span>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span className="text-sm text-gray-400">IA generativa</span>
+                    <span className="text-sm font-semibold text-[#f0c77b]">
+                      A conectar
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="grid gap-4 md:grid-cols-3">
+            {dashboardMetrics.map((metric) => (
+              <article key={metric.label} className="glass-panel px-5 py-5">
+                <p className="text-xs uppercase tracking-[0.24em] text-gray-500">
+                  {metric.label}
+                </p>
+                <p className="mt-3 text-4xl font-semibold text-[var(--accent-gold)]">
+                  {metric.value}
+                </p>
+                <p className="mt-3 text-sm leading-6 text-gray-300">
+                  {metric.detail}
+                </p>
+              </article>
+            ))}
+          </section>
+
+          <section className="glass-panel px-6 py-6">
+            <div className="flex items-end justify-between gap-4 border-b border-[rgba(255,255,255,0.08)] pb-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-gray-500">
+                  Modulos principais
+                </p>
+                <h2 className="mt-2 text-2xl font-semibold text-white">
+                  Fluxos ativos no estagio atual
+                </h2>
+              </div>
+            </div>
+            <div className="mt-5 grid gap-4 md:grid-cols-2">
+              {workflows.map((workflow) => (
+                <Link
+                  key={workflow.slug}
+                  href={workflow.href}
+                  className="group rounded-[28px] border border-[rgba(255,255,255,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-5 transition hover:border-[rgba(207,170,107,0.22)] hover:bg-[rgba(255,255,255,0.05)]"
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="rounded-full border border-[rgba(255,255,255,0.08)] px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-gray-400">
+                      {workflow.category}
+                    </span>
+                    <span className="text-[11px] uppercase tracking-[0.2em] text-[var(--accent-gold)]">
+                      {workflow.badge}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 text-xl font-semibold text-white transition group-hover:text-[var(--accent-gold)]">
+                    {workflow.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-gray-300">
+                    {workflow.description}
+                  </p>
+                  <div className="mt-5 flex items-center justify-between gap-4 text-sm">
+                    <span className="text-gray-400">{workflow.estimatedTime}</span>
+                    <span className="font-medium text-white">
+                      Abrir modulo
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="space-y-6">
+          <section className="glass-panel px-6 py-6">
+            <p className="text-xs uppercase tracking-[0.28em] text-gray-500">
+              Pilares de compliance
+            </p>
+            <div className="mt-5 space-y-3">
+              {compliancePillars.map((pillar) => (
+                <div
+                  key={pillar}
+                  className="rounded-3xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-4 py-4 text-sm leading-6 text-gray-200"
+                >
+                  {pillar}
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="glass-panel px-6 py-6">
+            <p className="text-xs uppercase tracking-[0.28em] text-gray-500">
+              Mapa tecnico
+            </p>
+            <div className="mt-5 space-y-4">
+              <div className="rounded-3xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-4 py-4">
+                <p className="text-sm font-semibold text-white">
+                  `User`, `Chat` e `Message`
+                </p>
+                <p className="mt-2 text-sm leading-6 text-gray-300">
+                  O schema ja define a espinha dorsal para historico de
+                  conversas e rastreio por funcao.
+                </p>
+              </div>
+              <div className="rounded-3xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-4 py-4">
+                <p className="text-sm font-semibold text-white">
+                  `GeneratedImage`
+                </p>
+                <p className="mt-2 text-sm leading-6 text-gray-300">
+                  Ha espaco claro para conectar motores diferentes e comparar
+                  saidas 1:1 na mesma sessao.
+                </p>
+              </div>
+              <div className="rounded-3xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-4 py-4">
+                <p className="text-sm font-semibold text-white">
+                  Proximo encaixe natural
+                </p>
+                <p className="mt-2 text-sm leading-6 text-gray-300">
+                  Criar `lib/prisma`, seed inicial e actions para gravar
+                  briefings, mensagens e resultados por modulo.
+                </p>
+              </div>
+            </div>
+          </section>
         </div>
-      </main>
-    </div>
+      </div>
+    </AppShell>
   );
 }
